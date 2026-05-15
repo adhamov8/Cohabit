@@ -6,7 +6,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"log"
 	"log/slog"
 	"math"
 	"time"
@@ -114,11 +113,7 @@ func (s *CheckInService) CheckIn(ctx context.Context, userID, challengeID uuid.U
 	}
 
 	now := time.Now().UTC()
-	log.Printf("DEADLINE CHECK: now=%s deadline_raw=%s",
-		time.Now().UTC(), challenge.DeadlineTime)
 	rawDB, rawErr := s.challenges.GetDeadlineTimeText(ctx, challengeID)
-	fmt.Printf("DEBUG deadline_time field: %q, deadline_time from DB: %q (err=%v), now: %s\n",
-		challenge.DeadlineTime, rawDB, rawErr, now.Format(time.RFC3339))
 
 	rawDeadline := challenge.DeadlineTime
 	if rawErr == nil && rawDB != "" {

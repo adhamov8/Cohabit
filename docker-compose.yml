@@ -7,7 +7,6 @@ services:
       POSTGRES_DB: tracker
     volumes:
       - pgdata:/var/lib/postgresql/data
-      - ./internal/db/migrations:/docker-entrypoint-initdb.d
     ports:
       - "5432:5432"
     healthcheck:
